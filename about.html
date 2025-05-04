@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | EGON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-DyQz/2+dDZJkMB8+0fjrLRMOxfy7bhfZ6KizoF5k+aXqoVgw35gSWL9yjwEZ1iMt4B6C1YwAqLtrnM11yGZP1k==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    body { margin: 0; font-family: 'Montserrat', Arial, sans-serif; background: #0a101f; color: #fff; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px 0 48px; position: relative; z-index: 2; }
+    .brand { font-size: 2.2rem; font-weight: 700; color: #5ee7ff; letter-spacing: 2px; display: flex; align-items: center; }
+    .logo {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #5ee7ff;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    nav a { color: #b2eaff; text-decoration: none; margin: 0 18px; font-weight: 500; font-size: 1.1rem; transition: color 0.2s; }
+    nav a.active, nav a:hover { color: #5ee7ff; border-bottom: 2px solid #5ee7ff; padding-bottom: 2px; }
+    main { display: block; padding: 0; margin-top: 0; }
+    .about-section { width: 100%; max-width: 600px; margin: 0 auto; padding: 0; }
+    .about-title { font-size: 2.2rem; color: #5ee7ff; text-align: center; margin-bottom: 18px; margin-top: 0; }
+    .about-content { display: flex; flex-direction: column; gap: 18px; padding: 0; }
+    .about-avatar { width: 100px; height: 100px; border-radius: 50%; border: 4px solid #5ee7ff; margin: 0 auto 12px auto; background: #181f3a; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .about-avatar .logo { width: 100%; height: 100%; border: none; margin: 0; background-size: cover; }
+    .about-avatar img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; }
+    .about-bio { color: #b2eaff; font-size: 1.1rem; margin-bottom: 18px; }
+    .about-skills { margin-top: 24px; }
+    .about-skills span { display: inline-block; background: #5ee7ff22; color: #5ee7ff; border-radius: 12px; padding: 6px 18px; margin: 6px; font-weight: 600; font-size: 1rem; }
+    footer { width: 100%; text-align: center; padding: 24px 0 12px 0; color: #5ee7ff; font-size: 1rem; background: transparent; letter-spacing: 1px; z-index: 2; position: relative; }
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-gradient-overlay { z-index: 1; }
+    header, main, footer { position: relative; z-index: 2; }
+    .about-title {
+      font-size: 2.6rem;
+      color: #5ee7ff;
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      background: linear-gradient(90deg,#5ee7ff,#a685ff,#ff5efc,#5ee7ff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 3s linear infinite, flicker 2.5s infinite;
+    }
+    .about-subheading {
+      color: #a685ff;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      animation: fadeIn 1.2s;
+    }
+    .neon-lines {
+      width: 100%;
+      height: 8px;
+      margin: 0 auto 24px auto;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff, #ff5efc, #5ee7ff);
+      background-size: 300% 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 24px #5ee7ff99, 0 0 48px #a685ff44;
+      animation: gradientMove 4s linear infinite;
+    }
+    .achievements {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin-top: 40px;
+    }
+    .achievement-card {
+      background: #10182a;
+      border-radius: 18px;
+      box-shadow: 0 0 32px #5ee7ff33, 0 0 0 4px #a685ff22;
+      border: 3px solid #5ee7ff;
+      animation: neonGlow 3s linear infinite;
+      width: 280px;
+      padding: 20px;
+      text-align: center;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    .achievement-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .achievement-card:hover {
+      box-shadow: 0 0 64px #5ee7ffcc, 0 0 0 8px #a685ff55;
+      border-color: #a685ff;
+    }
+    .achievement-title {
+      color: #5ee7ff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .achievement-desc {
+      color: #b2eaff;
+      font-size: 0.98rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Add canvas for particles after opening body tag -->
+  <canvas id="particles-canvas"></canvas>
+
+  <header>
+    <div class="brand">
+      <span class="logo"></span> EGON
+    </div>
+    <nav>
+      <a href="egon-portfolio.html">Home</a>
+      <a href="#" class="active">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="skills.html">Skills</a>
+      <a href="content.html">Content</a>
+      <button onclick="openAuthModal()" style="margin-left:18px;background:#5ee7ff;color:#181f3a;padding:8px 18px;border-radius:8px;font-weight:700;border:none;cursor:pointer;">Login / Signup</button>
+    </nav>
+  </header>
+  <main style="padding:0;margin:0;">
+    <section class="about-section" style="margin:0 auto;padding:0;max-width:1200px;width:100%;">
+      <div class="about-title neon-flicker">About Me</div>
+      <div class="about-subheading">Learn more about my journey and expertise</div>
+      <div class="neon-lines"></div>
+      <div class="about-content" style="text-align:center;max-width:800px;margin:0 auto;padding:0 24px;">
+        <p style="color:#b2eaff;font-size:1.1rem;line-height:1.6;margin-bottom:24px;">
+          Welcome to my portfolio! I am a passionate designer and developer specializing in GFX, VFX, web development, and digital design. With years of experience, I strive to create visually stunning and impactful designs that help brands stand out.
+        </p>
+        <p style="color:#b2eaff;font-size:1.1rem;line-height:1.6;margin-bottom:24px;">
+          My journey in design started with a love for creativity and technology. I combine technical expertise with artistic vision to deliver high-quality work that meets client needs and exceeds expectations.
+        </p>
+      </div>
+      <div class="achievements">
+        <div class="achievement-card">
+          <div class="achievement-title">Years of Experience</div>
+          <div class="achievement-desc">Over 5 years in design and development</div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-title">Projects Completed</div>
+          <div class="achievement-desc">100+ successful projects delivered</div>
+        </div>
+        <div class="achievement-card">
+          <div class="achievement-title">Client Satisfaction</div>
+          <div class="achievement-desc">98% client satisfaction rate</div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 EGON. All rights reserved.
+  </footer>
+  <!-- Auth Modal -->
+  <div id="auth-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(10,16,31,0.95); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#181f3a; border-radius:16px; padding:32px 24px; max-width:350px; width:90%; box-shadow:0 0 32px #5ee7ff55; text-align:center;">
+      <h2 style="color:#5ee7ff;">Login / Signup</h2>
+      <input id="auth-email" type="email" placeholder="Email" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <input id="auth-password" type="password" placeholder="Password" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <button onclick="login()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#5ee7ff;color:#181f3a;font-weight:700;">Login</button>
+      <button onclick="signup()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#a685ff;color:#fff;font-weight:700;">Sign Up</button>
+      <button onclick="closeAuthModal()" style="margin-top:10px;background:none;border:none;color:#5ee7ff;">Close</button>
+      <div id="auth-message" style="color:#ff5e5e;margin-top:10px;"></div>
+    </div>
+  </div>
+  <!-- Firebase Auth JS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtdBUjaBHNN4qFPMrD91M4HYONj_h6OOo",
+      authDomain: "egon-web.firebaseapp.com",
+      projectId: "egon-web",
+      storageBucket: "egon-web.firebasestorage.app",
+      messagingSenderId: "1040413593428",
+      appId: "1:1040413593428:web:55ecd13d0998800f5b42c1",
+      measurementId: "G-PW0LSV4C79"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    window.openAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'flex';
+      document.getElementById('auth-message').innerText = '';
+    }
+    window.closeAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'none';
+    }
+    window.login = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    window.signup = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = user.email);
+      } else {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = '');
+      }
+    });
+  </script>
+
+  <!-- Add script for glowing particles -->
+  <script>
+  (function() {
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let w = window.innerWidth, h = window.innerHeight;
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const PARTICLE_COUNT = 70;
+    const particles = [];
+    function randomColor() {
+      const colors = ['#5ee7ff', '#a685ff', '#ff5efc', '#5effb1'];
+      return colors[Math.floor(Math.random() * colors.length)];
+    }
+    function Particle() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.radius = Math.random() * 2.5 + 1.5;
+      this.color = randomColor();
+      this.speedX = (Math.random() - 0.5) * 0.7;
+      this.speedY = (Math.random() - 0.5) * 0.7;
+      this.alpha = Math.random() * 0.5 + 0.5;
+    }
+    Particle.prototype.draw = function() {
+      ctx.save();
+      ctx.globalAlpha = this.alpha;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 18;
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    };
+    Particle.prototype.update = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.y < 0 || this.y > h) this.speedY *= -1;
+    };
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new Particle());
+    }
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+  </script>
+
+  <!-- Add script to animate achievement cards on scroll -->
+  <script>
+  function animateAchievementCards() {
+    const cards = document.querySelectorAll('.achievement-card');
+    const trigger = window.innerHeight * 0.92;
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < trigger) {
+        card.classList.add('visible');
+      }
+    });
+  }
+  window.addEventListener('scroll', animateAchievementCards);
+  window.addEventListener('DOMContentLoaded', animateAchievementCards);
+  </script>
+</body>
+</html> 

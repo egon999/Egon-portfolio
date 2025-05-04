@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content | EGON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-DyQz/2+dDZJkMB8+0fjrLRMOxfy7bhfZ6KizoF5k+aXqoVgw35gSWL9yjwEZ1iMt4B6C1YwAqLtrnM11yGZP1k==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    body { margin: 0; font-family: 'Montserrat', Arial, sans-serif; background: #0a101f; color: #fff; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px 0 48px; position: relative; z-index: 2; }
+    .brand { font-size: 2.2rem; font-weight: 700; color: #5ee7ff; letter-spacing: 2px; display: flex; align-items: center; }
+    .logo {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #5ee7ff;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    nav a { color: #b2eaff; text-decoration: none; margin: 0 18px; font-weight: 500; font-size: 1.1rem; transition: color 0.2s; }
+    nav a.active, nav a:hover { color: #5ee7ff; border-bottom: 2px solid #5ee7ff; padding-bottom: 2px; }
+    main { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 0; margin-top: 32px; }
+    .content-section { width: 100%; max-width: 700px; margin: 0 auto 32px auto; background: #10182a; border-radius: 18px; box-shadow: 0 0 32px #5ee7ff22; padding: 32px 20px; text-align: center; }
+    .content-title { font-size: 2.2rem; color: #5ee7ff; margin-bottom: 24px; }
+    .content-list { list-style: none; padding: 0; margin: 0; }
+    .content-list li { background: #181f3a; color: #b2eaff; border-radius: 12px; margin: 14px 0; padding: 18px 18px; font-size: 1.1rem; box-shadow: 0 0 12px #5ee7ff22; display: flex; align-items: center; gap: 16px; justify-content: center; }
+    .content-list i { color: #5ee7ff; font-size: 1.4rem; }
+    .content-list a { color: #5ee7ff; text-decoration: underline; margin-left: 8px; }
+    .content-list a:hover { color: #a685ff; }
+    footer { width: 100%; text-align: center; padding: 24px 0 12px 0; color: #5ee7ff; font-size: 1rem; background: transparent; letter-spacing: 1px; z-index: 2; position: relative; }
+    #particles-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .featured-card {
+      background: #181f3a;
+      border-radius: 18px;
+      box-shadow: 0 0 32px #5ee7ff44, 0 0 0 4px #a685ff33;
+      border: 2.5px solid #5ee7ff;
+      margin-bottom: 32px;
+      padding: 28px 18px 22px 18px;
+      text-align: center;
+      position: relative;
+      animation: neonGlow 3s linear infinite;
+    }
+    .featured-badge {
+      position: absolute; top: -18px; left: 18px;
+      background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #181f3a; font-weight: 900; font-size: 0.95rem;
+      padding: 4px 18px; border-radius: 12px; box-shadow: 0 0 12px #5ee7ff99;
+      letter-spacing: 1px;
+    }
+    .featured-card i {
+      font-size: 2.6rem; color: #ff5efc; margin-bottom: 8px; text-shadow: 0 0 18px #ff5efc99;
+    }
+    .featured-title { font-size: 1.3rem; color: #5ee7ff; font-weight: 700; margin-bottom: 6px; }
+    .featured-desc { color: #b2eaff; font-size: 1.05rem; margin-bottom: 14px; }
+    .featured-btn {
+      display: inline-block; background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #181f3a; font-weight: 800; font-size: 1.08rem;
+      padding: 10px 28px; border-radius: 18px; border: none;
+      box-shadow: 0 0 18px #5ee7ff99;
+      text-decoration: none; letter-spacing: 1px; transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .featured-btn:hover { background: linear-gradient(90deg,#a685ff,#5ee7ff); color: #fff; box-shadow: 0 0 32px #a685ffcc; }
+    .content-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 22px; margin-bottom: 32px; }
+    @media (max-width: 800px) { .content-cards { grid-template-columns: 1fr; } }
+    .content-card {
+      background: #181f3a;
+      border-radius: 16px;
+      box-shadow: 0 0 24px #5ee7ff22, 0 0 0 3px #a685ff22;
+      border: 2px solid #5ee7ff;
+      padding: 22px 14px 18px 14px;
+      text-align: center;
+      position: relative;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+      opacity: 0; transform: translateY(40px) scale(0.98);
+      animation-fill-mode: forwards;
+    }
+    .content-card.visible { opacity: 1; transform: translateY(0) scale(1); transition: opacity 0.7s, transform 0.7s; }
+    .content-card:hover {
+      box-shadow: 0 0 48px #5ee7ffcc, 0 0 0 8px #a685ff55;
+      border-color: #a685ff;
+      transform: scale(1.04) rotate(-1deg);
+      z-index: 2;
+    }
+    .content-card i { font-size: 2.1rem; color: #5ee7ff; margin-bottom: 8px; text-shadow: 0 0 12px #5ee7ff99; }
+    .card-title { color: #5ee7ff; font-size: 1.13rem; font-weight: 700; margin-bottom: 4px; }
+    .badge-new { background: #ff5efc; color: #fff; font-size: 0.85rem; font-weight: 700; border-radius: 8px; padding: 2px 10px; margin-left: 8px; letter-spacing: 1px; box-shadow: 0 0 8px #ff5efc99; }
+    .card-desc { color: #b2eaff; font-size: 1.01rem; margin-bottom: 10px; }
+    .card-btn {
+      display: inline-block; background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #181f3a; font-weight: 800; font-size: 1.01rem;
+      padding: 8px 22px; border-radius: 14px; border: none;
+      box-shadow: 0 0 12px #5ee7ff99;
+      text-decoration: none; letter-spacing: 1px; transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: 6px;
+    }
+    .card-btn:hover { background: linear-gradient(90deg,#a685ff,#5ee7ff); color: #fff; box-shadow: 0 0 24px #a685ffcc; }
+    .order-btn { position: relative; overflow: hidden; }
+    .order-btn:active::after {
+      content: '';
+      position: absolute; left: 50%; top: 50%; width: 120px; height: 120px;
+      background: radial-gradient(circle, #5ee7ff88 60%, transparent 100%);
+      border-radius: 50%; pointer-events: none; transform: translate(-50%,-50%);
+      animation: ripple 0.5s linear;
+      z-index: 10;
+    }
+    @keyframes ripple { 0% { opacity: 1; } 100% { opacity: 0; transform: scale(2); } }
+    .main-btn {
+      background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #181f3a; font-weight: 900; font-size: 1.13rem;
+      padding: 14px 38px; border-radius: 32px; border: none;
+      box-shadow: 0 0 24px #5ee7ff99, 0 0 48px #a685ff44;
+      cursor: pointer; letter-spacing: 1px; transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none; margin: 0 12px 0 0;
+      margin-top: 18px;
+    }
+    .main-btn:hover { background: linear-gradient(90deg,#a685ff,#5ee7ff); color: #fff; box-shadow: 0 0 48px #a685ffcc; }
+    .content-actions { display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; margin-top: 18px; }
+    @media (max-width: 600px) { .content-actions { flex-direction: column; gap: 12px; } }
+    @keyframes neonGlow {
+      0% { box-shadow: 0 0 32px #5ee7ff44, 0 0 0 4px #a685ff33; }
+      100% { box-shadow: 0 0 64px #a685ff99, 0 0 0 8px #5ee7ff55; }
+    }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+  <canvas id="particles-bg"></canvas>
+  <header>
+    <div class="brand">
+      <span class="logo"></span> EGON
+    </div>
+    <nav>
+      <a href="egon-portfolio.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="skills.html">Skills</a>
+      <a href="#" class="active">Content</a>
+    </nav>
+  </header>
+  <main>
+    <section class="content-section">
+      <div class="content-title">My Content & Services</div>
+      <div class="featured-card fade-in">
+        <div class="featured-badge">FEATURED</div>
+        <i class="fab fa-youtube"></i>
+        <div class="featured-title">Latest YouTube Video</div>
+        <div class="featured-desc">Check out my newest video for design tips, speed art, and more!</div>
+        <a href="https://www.youtube.com/@BRT-EGON" target="_blank" class="featured-btn">Watch Now</a>
+      </div>
+      <div class="content-cards">
+        <div class="content-card fade-in">
+          <i class="fas fa-paint-brush"></i>
+          <div class="card-title">Digital Art & GFX <span class="badge-new">NEW</span></div>
+          <div class="card-desc">Custom digital art, banners, and graphics for your brand or channel.</div>
+          <a href="portfolio.html" class="card-btn">View Portfolio</a>
+        </div>
+        <div class="content-card fade-in">
+          <i class="fas fa-laptop-code"></i>
+          <div class="card-title">Website Development</div>
+          <div class="card-desc">Modern, responsive websites for creators and businesses.</div>
+          <a href="portfolio.html" class="card-btn">See Projects</a>
+        </div>
+        <div class="content-card fade-in">
+          <i class="fas fa-shopping-cart"></i>
+          <div class="card-title">Order Custom Work</div>
+          <div class="card-desc">Get your own custom design, logo, or website. Fast delivery!</div>
+          <a href="order.html" class="card-btn order-btn">Order Now</a>
+        </div>
+        <div class="content-card fade-in">
+          <i class="fab fa-telegram"></i>
+          <div class="card-title">Telegram Channel</div>
+          <div class="card-desc">Join my Telegram for updates, freebies, and more.</div>
+          <a href="https://t.me/egonbranding" target="_blank" class="card-btn">Join</a>
+        </div>
+      </div>
+      <div class="content-actions">
+        <button class="main-btn order-btn" onclick="window.location.href='order.html'">Order Now</button>
+        <button class="main-btn contact-btn" onclick="window.open('https://discord.gg/tD455vAWDd','_blank')">Contact Me</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 EGON. All rights reserved.
+  </footer>
+  <script>
+    // Glowing particles background
+    (function(){
+      const canvas = document.getElementById('particles-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth, h = window.innerHeight;
+      function resize() {
+        w = window.innerWidth; h = window.innerHeight;
+        canvas.width = w; canvas.height = h;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+      // Particle config
+      const colors = ['#5ee7ff', '#a685ff', '#ff5efc', '#fff'];
+      const particles = Array.from({length: 28}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 1.8 + Math.random()*2.8,
+        dx: -0.4 + Math.random()*0.8,
+        dy: -0.4 + Math.random()*0.8,
+        c: colors[Math.floor(Math.random()*colors.length)]
+      }));
+      function draw() {
+        ctx.clearRect(0,0,w,h);
+        for (let p of particles) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r*2.2, 0, 2*Math.PI);
+          ctx.shadowColor = p.c;
+          ctx.shadowBlur = 18;
+          ctx.globalAlpha = 0.18;
+          ctx.fillStyle = p.c;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
+          ctx.fillStyle = p.c;
+          ctx.shadowBlur = 0;
+          ctx.fill();
+          ctx.restore();
+          p.x += p.dx; p.y += p.dy;
+          if (p.x < -20) p.x = w+20;
+          if (p.x > w+20) p.x = -20;
+          if (p.y < -20) p.y = h+20;
+          if (p.y > h+20) p.y = -20;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+    // Fade-in effect for .fade-in
+    function fadeInSections() {
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', fadeInSections);
+    window.addEventListener('DOMContentLoaded', fadeInSections);
+  </script>
+</body>
+</html> 
