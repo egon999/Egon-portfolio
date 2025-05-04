@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills | EGON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-DyQz/2+dDZJkMB8+0fjrLRMOxfy7bhfZ6KizoF5k+aXqoVgw35gSWL9yjwEZ1iMt4B6C1YwAqLtrnM11yGZP1k==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    body { margin: 0; font-family: 'Montserrat', Arial, sans-serif; background: #0a101f; color: #fff; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px 0 48px; position: relative; z-index: 2; }
+    .brand { font-size: 2.2rem; font-weight: 700; color: #5ee7ff; letter-spacing: 2px; display: flex; align-items: center; }
+    .logo {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #5ee7ff;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    nav a { color: #b2eaff; text-decoration: none; margin: 0 18px; font-weight: 500; font-size: 1.1rem; transition: color 0.2s; }
+    nav a.active, nav a:hover { color: #5ee7ff; border-bottom: 2px solid #5ee7ff; padding-bottom: 2px; }
+    main { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 0; margin-top: 32px; }
+    .skills-section { width: 100%; max-width: 700px; margin: 0 auto 32px auto; background: #10182a; border-radius: 18px; box-shadow: 0 0 32px #5ee7ff22; padding: 32px 20px; text-align: center; }
+    .skills-title { font-size: 2.2rem; color: #5ee7ff; margin-bottom: 24px; }
+    .skills-list { display: flex; flex-direction: column; gap: 24px; }
+    .skill-bar { display: flex; align-items: center; gap: 18px; }
+    .skill-icon {
+      font-size: 2.2rem;
+      color: #5ee7ff;
+      width: 48px;
+      text-align: center;
+      filter: drop-shadow(0 0 8px #5ee7ff99);
+      transition: color 0.3s, filter 0.3s, transform 0.3s;
+      animation: skillIconPulse 2.2s infinite alternate;
+    }
+    .skill-icon:hover {
+      color: #a685ff;
+      filter: drop-shadow(0 0 24px #a685ff99);
+      transform: scale(1.18) rotate(-6deg);
+    }
+    @keyframes skillIconPulse {
+      0% { filter: drop-shadow(0 0 8px #5ee7ff99); }
+      100% { filter: drop-shadow(0 0 24px #a685ff99); }
+    }
+    .skill-label { font-size: 1.1rem; color: #b2eaff; width: 160px; text-align: left; }
+    .bar-bg {
+      flex: 1;
+      height: 16px;
+      background: #181f3a;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 12px #5ee7ff22;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff);
+      box-shadow: 0 0 12px #5ee7ff99;
+      width: 0;
+      animation: barFillAnim 1.6s forwards cubic-bezier(.7,1.7,.6,1);
+    }
+    .bar-fill-1 { animation-delay: 0.2s; }
+    .bar-fill-2 { animation-delay: 0.4s; }
+    .bar-fill-3 { animation-delay: 0.6s; }
+    .bar-fill-4 { animation-delay: 0.8s; }
+    .bar-fill-5 { animation-delay: 1.0s; }
+    @keyframes barFillAnim {
+      from { width: 0; }
+      to { width: var(--bar-width, 95%); }
+    }
+    footer { width: 100%; text-align: center; padding: 24px 0 12px 0; color: #5ee7ff; font-size: 1rem; background: transparent; letter-spacing: 1px; z-index: 2; position: relative; }
+    .stack-main-icon {
+      font-size: 4.5rem;
+      color: #5ee7ff;
+      text-shadow: 0 0 32px #5ee7ff, 0 0 64px #a685ff, 0 0 128px #5ee7ff99;
+      border-radius: 50%;
+      background: radial-gradient(circle, #10182a 60%, #5ee7ff22 100%);
+      box-shadow: 0 0 64px 16px #5ee7ff55, 0 0 128px 32px #a685ff33;
+      padding: 24px 36px;
+      animation: stackPulse 2.2s infinite alternate cubic-bezier(.7,1.7,.6,1);
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes stackPulse {
+      0% { filter: drop-shadow(0 0 16px #5ee7ff) brightness(1.1); }
+      100% { filter: drop-shadow(0 0 48px #a685ff) brightness(1.4); }
+    }
+    .stack-icon img {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: #181f3a;
+      box-shadow: 0 0 18px #5ee7ff44, 0 0 32px #a685ff22;
+      border: 2.5px solid #5ee7ff;
+      transition: box-shadow 0.3s, border-color 0.3s, transform 0.3s;
+      animation: iconGlow 2.5s infinite alternate;
+    }
+    .stack-icon img:hover {
+      border-color: #a685ff;
+      box-shadow: 0 0 32px #a685ff99, 0 0 64px #5ee7ff77;
+      transform: scale(1.12) rotate(-3deg);
+    }
+    @keyframes iconGlow {
+      0% { box-shadow: 0 0 18px #5ee7ff44, 0 0 32px #a685ff22; }
+      100% { box-shadow: 0 0 32px #a685ff99, 0 0 64px #5ee7ff77; }
+    }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 0.8s, transform 0.8s; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .stack-icon {
+      position: relative;
+      animation: floatIcon 3.2s ease-in-out infinite alternate;
+    }
+    @keyframes floatIcon {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+    .stack-icon:hover img {
+      transform: scale(1.18) rotate(-6deg);
+      z-index: 2;
+    }
+    .stack-icon .tooltip {
+      display: none;
+      position: absolute;
+      bottom: -38px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #181f3a;
+      color: #5ee7ff;
+      padding: 6px 16px;
+      border-radius: 8px;
+      font-size: 0.98rem;
+      box-shadow: 0 0 12px #5ee7ff55;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .stack-icon:hover .tooltip {
+      display: block;
+      opacity: 1;
+    }
+    .badge {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 1.2rem;
+      color: #ffe066;
+      animation: badgePulse 1.5s infinite alternate;
+      vertical-align: middle;
+      filter: drop-shadow(0 0 8px #ffe06699);
+    }
+    @keyframes badgePulse {
+      0% { filter: drop-shadow(0 0 8px #ffe06699); }
+      100% { filter: drop-shadow(0 0 24px #ffe066cc); }
+    }
+    .bar-fill {
+      position: relative;
+      overflow: visible;
+    }
+    .bar-glow {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 18px;
+      background: radial-gradient(circle, #fff 40%, #5ee7ff44 100%);
+      border-radius: 50%;
+      box-shadow: 0 0 16px #5ee7ff99;
+      pointer-events: none;
+      opacity: 0.7;
+      z-index: 2;
+      transition: opacity 0.2s;
+    }
+    .bar-percentage {
+      display: none;
+    }
+    .bar-check {
+      display: none;
+    }
+    .tools-list {
+      display: block;
+      color: #5ee7ff;
+      font-size: 1.01rem;
+      font-weight: 500;
+      margin: 6px 0 0 0;
+      letter-spacing: 0.2px;
+      text-align: left;
+      text-shadow: 0 0 6px #5ee7ff33;
+    }
+    .bar-icon {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+      color: #a685ff;
+      filter: drop-shadow(0 0 8px #a685ff99);
+      animation: iconPulse 2s infinite alternate;
+      z-index: 3;
+    }
+    @keyframes iconPulse {
+      0% { filter: drop-shadow(0 0 8px #a685ff99); }
+      100% { filter: drop-shadow(0 0 24px #5ee7ffcc); }
+    }
+    .neon-divider {
+      width: 100%;
+      height: 3px;
+      margin: 18px 0 18px 0;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff, #ff5efc, #5ee7ff);
+      background-size: 200% 200%;
+      border-radius: 2px;
+      box-shadow: 0 0 12px #5ee7ff99, 0 0 24px #a685ff44;
+      animation: gradientMove 3s linear infinite;
+    }
+    .resume-btn {
+      display: inline-block;
+      margin: 32px auto 0 auto;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff);
+      color: #181f3a;
+      font-weight: 800;
+      font-size: 1.15rem;
+      padding: 14px 38px;
+      border-radius: 32px;
+      border: none;
+      box-shadow: 0 0 24px #5ee7ff99, 0 0 48px #a685ff44;
+      cursor: pointer;
+      letter-spacing: 1px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none;
+      z-index: 10;
+    }
+    .resume-btn:hover {
+      background: linear-gradient(90deg, #a685ff, #5ee7ff);
+      color: #fff;
+      box-shadow: 0 0 48px #a685ffcc;
+    }
+    .sparkle {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      font-size: 1.2rem;
+      color: #fff;
+      opacity: 0;
+      animation: sparkleAnim 0.7s linear;
+    }
+    @keyframes sparkleAnim {
+      0% { opacity: 0; transform: scale(0.5) translateY(-50%); }
+      40% { opacity: 1; transform: scale(1.2) translateY(-50%) rotate(-10deg); }
+      80% { opacity: 1; transform: scale(1) translateY(-50%) rotate(10deg); }
+      100% { opacity: 0; transform: scale(0.5) translateY(-50%); }
+    }
+    /* Section background animation */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 60% 10%, #5ee7ff22 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, #a685ff22 0%, transparent 70%);
+      animation: bgMove 12s linear infinite alternate;
+    }
+    @keyframes bgMove {
+      0% { background-position: 60% 10%, 20% 80%; }
+      100% { background-position: 70% 20%, 10% 90%; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="particles-bg"></canvas>
+  <header>
+    <div class="brand">
+      <span class="logo"></span> EGON
+    </div>
+    <nav>
+      <a href="egon-portfolio.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="#" class="active">Skills</a>
+      <a href="content.html">Content</a>
+    </nav>
+  </header>
+  <main>
+    <section class="skills-section" style="margin-bottom: 0;">
+      <div class="skills-title" style="margin-bottom: 12px;">STACK</div>
+      <div style="color:#b2eaff; font-size:1.1rem; margin-bottom: 18px; letter-spacing:1px;">SOFTWARE & TECHNOLOGY</div>
+      <div style="display:flex;justify-content:center;align-items:center;margin-bottom:24px;">
+        <span class="stack-main-icon"><i class="fas fa-microchip"></i></span>
+      </div>
+      <div class="stack-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(72px,1fr));gap:28px;justify-items:center;align-items:center;position:relative;max-width:520px;margin:0 auto 32px auto;">
+        <!-- ICONS: Use SVGs from CDN -->
+        <div class="stack-icon" data-label="HTML5"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" /><span class="tooltip">HTML5</span></div>
+        <div class="stack-icon" data-label="CSS3"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" /><span class="tooltip">CSS3</span></div>
+        <div class="stack-icon" data-label="JavaScript"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" /><span class="tooltip">JavaScript</span></div>
+        <div class="stack-icon" data-label="Python"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" /><span class="tooltip">Python</span></div>
+        <div class="stack-icon" data-label="VS Code"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" /><span class="tooltip">VS Code</span></div>
+        <div class="stack-icon" data-label="After Effects"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aftereffects/aftereffects-original.svg" alt="After Effects" /><span class="tooltip">After Effects</span></div>
+        <div class="stack-icon" data-label="Premiere Pro"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-original.svg" alt="Premiere Pro" /><span class="tooltip">Premiere Pro</span></div>
+        <div class="stack-icon" data-label="Blender"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/blender/blender-original.svg" alt="Blender" /><span class="tooltip">Blender</span></div>
+        <div class="stack-icon" data-label="Photoshop"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg" alt="Photoshop" /><span class="tooltip">Photoshop</span></div>
+        <div class="stack-icon" data-label="Illustrator"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg" alt="Illustrator" /><span class="tooltip">Illustrator</span></div>
+      </div>
+      <div id="stack-spotlight"></div>
+    </section>
+    <script>
+      // Animated spotlight for stack icons
+      const icons = document.querySelectorAll('.stack-icon');
+      const spotlight = document.createElement('div');
+      spotlight.style.position = 'absolute';
+      spotlight.style.width = '72px';
+      spotlight.style.height = '72px';
+      spotlight.style.borderRadius = '50%';
+      spotlight.style.boxShadow = '0 0 16px 4px #fff4, 0 0 32px 8px #5ee7ff22';
+      spotlight.style.background = 'radial-gradient(circle, #fff4 50%, #5ee7ff11 100%)';
+      spotlight.style.pointerEvents = 'none';
+      spotlight.style.transition = 'all 0.6s cubic-bezier(.7,1.7,.6,1)';
+      spotlight.style.zIndex = '1';
+      document.querySelector('.stack-grid').appendChild(spotlight);
+      let idx = 0;
+      function moveSpotlight() {
+        const icon = icons[idx];
+        const rect = icon.getBoundingClientRect();
+        const gridRect = icon.parentElement.getBoundingClientRect();
+        spotlight.style.left = (icon.offsetLeft - 12) + 'px';
+        spotlight.style.top = (icon.offsetTop - 12) + 'px';
+        idx = (idx + 1) % icons.length;
+      }
+      setTimeout(moveSpotlight, 400); // Initial position
+      setInterval(moveSpotlight, 1200);
+    </script>
+    <section class="skills-section">
+      <div class="skills-title">My Skills</div>
+      <div class="skills-list fade-in">
+        <div class="skill-bar">
+          <span class="skill-icon"><i class="fas fa-code"></i><span class="badge" title="Top Skill">★</span></span>
+          <span class="skill-label">Web Development</span>
+          <span class="tools-list">Tools: VS Code, .NET, React</span>
+          <span class="bar-bg" data-tip="Built 30+ websites">
+            <span class="bar-fill bar-fill-1">
+              <span class="bar-glow"></span>
+              <span class="bar-icon"><i class="fab fa-html5"></i></span>
+            </span>
+            <span class="sparkle">✨</span>
+          </span>
+        </div>
+        <div class="neon-divider"></div>
+        <div class="skill-bar">
+          <span class="skill-icon"><i class="fas fa-magic"></i><span class="badge" title="Top Skill">★</span></span>
+          <span class="skill-label">GFX / VFX</span>
+          <span class="tools-list">Tools: After Effects, Premiere Pro, Blender</span>
+          <span class="bar-bg" data-tip="Award-winning GFX artist">
+            <span class="bar-fill bar-fill-2">
+              <span class="bar-glow"></span>
+              <span class="bar-icon"><i class="fas fa-bolt"></i></span>
+            </span>
+            <span class="sparkle">✨</span>
+          </span>
+        </div>
+        <div class="neon-divider"></div>
+        <div class="skill-bar">
+          <span class="skill-icon"><i class="fas fa-bullhorn"></i></span>
+          <span class="skill-label">Branding</span>
+          <span class="tools-list">Tools: Illustrator, Photoshop</span>
+          <span class="bar-bg" data-tip="Branding for 50+ clients">
+            <span class="bar-fill bar-fill-3">
+              <span class="bar-glow"></span>
+              <span class="bar-icon"><i class="fas fa-bullseye"></i></span>
+            </span>
+            <span class="sparkle">✨</span>
+          </span>
+        </div>
+        <div class="neon-divider"></div>
+        <div class="skill-bar">
+          <span class="skill-icon"><i class="fas fa-paint-brush"></i></span>
+          <span class="skill-label">Digital Art</span>
+          <span class="tools-list">Tools: Photoshop, Krita</span>
+          <span class="bar-bg" data-tip="Digital artist since 2018">
+            <span class="bar-fill bar-fill-4">
+              <span class="bar-glow"></span>
+              <span class="bar-icon"><i class="fas fa-palette"></i></span>
+            </span>
+            <span class="sparkle">✨</span>
+          </span>
+        </div>
+        <div class="neon-divider"></div>
+        <div class="skill-bar">
+          <span class="skill-icon"><i class="fas fa-object-group"></i></span>
+          <span class="skill-label">UI / UX</span>
+          <span class="tools-list">Tools: Figma, Adobe XD</span>
+          <span class="bar-bg" data-tip="UI/UX for 20+ apps">
+            <span class="bar-fill bar-fill-5">
+              <span class="bar-glow"></span>
+              <span class="bar-icon"><i class="fas fa-mobile-alt"></i></span>
+            </span>
+            <span class="sparkle">✨</span>
+          </span>
+        </div>
+      </div>
+      <button class="resume-btn" onclick="window.open('resume.pdf','_blank')"><i class="fas fa-download"></i> Download Resume</button>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 EGON. All rights reserved.
+  </footer>
+  <script>
+    // Glowing particles background
+    (function(){
+      const canvas = document.getElementById('particles-bg');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth, h = window.innerHeight;
+      function resize() {
+        w = window.innerWidth; h = window.innerHeight;
+        canvas.width = w; canvas.height = h;
+      }
+      resize();
+      canvas.style.position = 'fixed';
+      canvas.style.top = 0;
+      canvas.style.left = 0;
+      canvas.style.width = '100vw';
+      canvas.style.height = '100vh';
+      canvas.style.zIndex = 0;
+      canvas.style.pointerEvents = 'none';
+      window.addEventListener('resize', resize);
+      // Particle config
+      const colors = ['#5ee7ff', '#a685ff', '#ff5efc', '#fff'];
+      const particles = Array.from({length: 32}, () => ({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        r: 1.8 + Math.random()*2.8,
+        dx: -0.4 + Math.random()*0.8,
+        dy: -0.4 + Math.random()*0.8,
+        c: colors[Math.floor(Math.random()*colors.length)]
+      }));
+      function draw() {
+        ctx.clearRect(0,0,w,h);
+        for (let p of particles) {
+          ctx.save();
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r*2.2, 0, 2*Math.PI);
+          ctx.shadowColor = p.c;
+          ctx.shadowBlur = 18;
+          ctx.globalAlpha = 0.18;
+          ctx.fillStyle = p.c;
+          ctx.fill();
+          ctx.globalAlpha = 1;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
+          ctx.fillStyle = p.c;
+          ctx.shadowBlur = 0;
+          ctx.fill();
+          ctx.restore();
+          p.x += p.dx; p.y += p.dy;
+          if (p.x < -20) p.x = w+20;
+          if (p.x > w+20) p.x = -20;
+          if (p.y < -20) p.y = h+20;
+          if (p.y > h+20) p.y = -20;
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+    // Animate skill bars on scroll with percentage
+    function animateSkillBars() {
+      document.querySelectorAll('.bar-fill').forEach(function(bar, i) {
+        const barRect = bar.getBoundingClientRect();
+        const winH = window.innerHeight || document.documentElement.clientHeight;
+        if (barRect.top < winH - 60 || winH > document.body.scrollHeight - 60) {
+          let percent = [95, 90, 85, 80, 75][i] || 80;
+          bar.style.setProperty('--bar-width', percent + '%');
+          bar.style.animationPlayState = 'running';
+          // Show checkmark icon when filled
+          const check = bar.querySelector('.bar-check');
+          if (check) {
+            check.classList.add('visible');
+          }
+          // Sparkle animation
+          const sparkle = bar.parentElement.querySelector('.sparkle');
+          if (sparkle) {
+            sparkle.style.opacity = 1;
+            sparkle.style.animation = 'sparkleAnim 0.7s linear';
+            setTimeout(()=>{
+              sparkle.style.opacity = 0;
+              sparkle.style.animation = '';
+            }, 700);
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', animateSkillBars);
+    window.addEventListener('DOMContentLoaded', animateSkillBars);
+    // Fade-in effect for .fade-in
+    function fadeInSections() {
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 60 || window.innerHeight > document.body.scrollHeight - 60) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', fadeInSections);
+    window.addEventListener('DOMContentLoaded', fadeInSections);
+    // Ripple effect on stack icon click
+    document.querySelectorAll('.stack-icon').forEach(function(icon) {
+      icon.addEventListener('click', function(e) {
+        const ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.left = (e.offsetX - 18) + 'px';
+        ripple.style.top = (e.offsetY - 18) + 'px';
+        ripple.style.width = ripple.style.height = '36px';
+        ripple.style.borderRadius = '50%';
+        ripple.style.background = 'radial-gradient(circle, #5ee7ff88 60%, transparent 100%)';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = 10;
+        ripple.style.opacity = 1;
+        ripple.style.transition = 'opacity 0.6s, transform 0.6s';
+        icon.appendChild(ripple);
+        setTimeout(() => {
+          ripple.style.opacity = 0;
+          ripple.style.transform = 'scale(2)';
+        }, 10);
+        setTimeout(() => icon.removeChild(ripple), 650);
+      });
+    });
+  </script>
+</body>
+</html> 

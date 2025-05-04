@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EGON Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: #0a101f;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    .particles {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 48px 0 48px;
+      position: relative;
+      z-index: 2;
+    }
+    .brand {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #5ee7ff;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #5ee7ff;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    nav a {
+      color: #b2eaff;
+      text-decoration: none;
+      margin: 0 18px;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: color 0.2s;
+    }
+    nav a.active, nav a:hover {
+      color: #5ee7ff;
+      border-bottom: 2px solid #5ee7ff;
+      padding-bottom: 2px;
+    }
+    .main-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 70vh;
+      z-index: 2;
+      position: relative;
+    }
+    .hero {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      padding: 64px 0 0 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+    .hero-content {
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      text-align: left;
+    }
+    .hero-subtitle {
+      color: #5ee7ff;
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 18px;
+      text-align: left;
+    }
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #b2eaff;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+    .hire-btn {
+      background: #5ee7ff;
+      color: #0a101f;
+      border: none;
+      border-radius: 24px;
+      padding: 12px 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 16px #5ee7ff44;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-right: 18px;
+    }
+    .hire-btn:hover {
+      background: #a685ff;
+      color: #fff;
+      box-shadow: 0 0 24px #a685ff99;
+    }
+    .socials {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .socials a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 2px solid #5ee7ff;
+      border-radius: 50%;
+      color: #5ee7ff;
+      font-size: 1.4rem;
+      background: transparent;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 8px #5ee7ff44;
+      margin: 0;
+    }
+    .socials a img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    .socials a:hover {
+      background: #5ee7ff22;
+      box-shadow: 0 0 16px #5ee7ff99;
+    }
+    .hero-avatar {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      overflow: visible;
+      background: transparent;
+    }
+    .hero-avatar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      z-index: 0;
+      pointer-events: none;
+      padding: 0;
+      background: conic-gradient(
+        #5ee7ff, #00ffea, #00ff5e, #faff00, #ff5e00, #ff005e, #a685ff, #ff5ecb, #5ee7ff
+      );
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      box-sizing: border-box;
+      border: 4px solid transparent;
+      animation: avatar-ring 3s linear infinite;
+    }
+    @keyframes avatar-ring {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes avatar-glow {
+      0% { filter: blur(8px); background-position: 0% 50%; }
+      100% { filter: blur(8px); background-position: 100% 50%; }
+    }
+    .hero-logo {
+      position: relative;
+      z-index: 1;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      border: 4px solid #0a101f;
+      display: block;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 64px;
+      margin: 64px 0 0 0;
+      z-index: 2;
+      position: relative;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #5ee7ff;
+    }
+    .stat-label {
+      color: #b2eaff;
+      font-size: 1.1rem;
+      margin-top: 4px;
+    }
+    .divider {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff);
+      border-radius: 2px;
+      margin: 32px auto;
+      box-shadow: 0 0 16px #5ee7ff99;
+    }
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 24px 0 12px 0;
+      color: #5ee7ff;
+      font-size: 1rem;
+      background: transparent;
+      letter-spacing: 1px;
+      z-index: 2;
+      position: relative;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      header {
+        padding: 20px 16px 0 16px;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      nav a {
+        margin: 0 8px;
+        font-size: 1rem;
+      }
+
+      .hero {
+        flex-direction: column;
+        padding: 32px 16px 0 16px;
+        gap: 32px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 100%;
+        align-items: center;
+      }
+
+      .hero-title {
+        font-size: 2.2rem;
+        text-align: center;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+        text-align: center;
+      }
+
+      .hero-desc {
+        font-size: 1rem;
+        text-align: center;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .hire-btn {
+        margin-right: 0;
+        width: 100%;
+        max-width: 280px;
+      }
+
+      .socials {
+        justify-content: center;
+      }
+
+      .stats {
+        gap: 32px;
+        padding: 0 16px;
+      }
+
+      .stat-value {
+        font-size: 1.8rem;
+      }
+
+      .stat-label {
+        font-size: 1rem;
+      }
+
+      .about-preview {
+        padding: 0 16px;
+      }
+
+      .about-preview p {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.8rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+
+      .hero-desc {
+        font-size: 0.9rem;
+      }
+
+      .stats {
+        gap: 24px;
+      }
+
+      .stat-value {
+        font-size: 1.5rem;
+      }
+
+      .stat-label {
+        font-size: 0.9rem;
+      }
+
+      nav a {
+        margin: 0 4px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-DyQz/2+dDZJkMB8+0fjrLRMOxfy7bhfZ6KizoF5k+aXqoVgw35gSWL9yjwEZ1iMt4B6C1YwAqLtrnM11yGZP1k==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+  <canvas class="particles"></canvas>
+  <header>
+    <div class="brand">
+      <span class="logo"></span> EGON
+    </div>
+    <nav>
+      <a href="#" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="skills.html">Skills</a>
+      <a href="content.html">Content</a>
+      <button onclick="openAuthModal()" style="margin-left:18px;background:#5ee7ff;color:#181f3a;padding:8px 18px;border-radius:8px;font-weight:700;border:none;cursor:pointer;">Login / Signup</button>
+    </nav>
+  </header>
+  <main class="main-content">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-title">Hi, I'm Egon</div>
+        <div class="hero-subtitle">I'M A DEVELOPER, DESIGNER & CREATOR</div>
+        <div class="divider"></div>
+        <div class="hero-desc">I'm Egon, a passionate developer and designer, creating stunning digital experiences and graphics for clients worldwide. Let's build something amazing together!</div>
+        <div class="hero-btns">
+          <a href="order.html"><button class="hire-btn">Hire Me</button></a>
+          <div class="socials">
+            <a href="https://discord.gg/tD455vAWDd" target="_blank" title="Discord"><img src="https://img.icons8.com/color/48/discord-logo.png" alt="Discord" /></a>
+            <a href="https://www.instagram.com/why.ayush06/" target="_blank" title="Instagram"><img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" /></a>
+            <a href="https://www.youtube.com/@BRT-EGON" target="_blank" title="YouTube"><img src="https://img.icons8.com/color/48/youtube-play.png" alt="YouTube" /></a>
+            <a href="https://t.me/egonbranding" target="_blank" title="Telegram"><img src="https://img.icons8.com/color/48/telegram-app.png" alt="Telegram" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <span class="hero-logo"></span>
+      </div>
+    </section>
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-value">2+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">3+</div>
+        <div class="stat-label">Technical Skills</div>
+      </div>
+      <div class="stat">
+        <div class="stat-value">500+</div>
+        <div class="stat-label">Satisfied Clients</div>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <section class="about-preview">
+      <h2 style="color:#5ee7ff;text-align:center;">About Me</h2>
+      <p style="max-width:600px;margin:12px auto 0 auto;text-align:center;color:#b2eaff;">I specialize in web development, GFX/VFX, branding, and digital art. My mission is to deliver visually stunning and highly functional solutions for every client. Explore my portfolio to see my work!</p>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 EGON. All rights reserved.
+  </footer>
+  <!-- Auth Modal -->
+  <div id="auth-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(10,16,31,0.95); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#181f3a; border-radius:16px; padding:32px 24px; max-width:350px; width:90%; box-shadow:0 0 32px #5ee7ff55; text-align:center;">
+      <h2 style="color:#5ee7ff;">Login / Signup</h2>
+      <input id="auth-email" type="email" placeholder="Email" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <input id="auth-password" type="password" placeholder="Password" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <button onclick="login()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#5ee7ff;color:#181f3a;font-weight:700;">Login</button>
+      <button onclick="signup()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#a685ff;color:#fff;font-weight:700;">Sign Up</button>
+      <button onclick="closeAuthModal()" style="margin-top:10px;background:none;border:none;color:#5ee7ff;">Close</button>
+      <div id="auth-message" style="color:#ff5e5e;margin-top:10px;"></div>
+    </div>
+  </div>
+  <!-- Firebase Auth JS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtdBUjaBHNN4qFPMrD91M4HYONj_h6OOo",
+      authDomain: "egon-web.firebaseapp.com",
+      projectId: "egon-web",
+      storageBucket: "egon-web.firebasestorage.app",
+      messagingSenderId: "1040413593428",
+      appId: "1:1040413593428:web:55ecd13d0998800f5b42c1",
+      measurementId: "G-PW0LSV4C79"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    window.openAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'flex';
+      document.getElementById('auth-message').innerText = '';
+    }
+    window.closeAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'none';
+    }
+    window.login = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    window.signup = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = user.email);
+      } else {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = '');
+      }
+    });
+  </script>
+  <script>
+    // Simple animated particles background
+    const canvas = document.querySelector('.particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    function resize() {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function Particle() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.radius = Math.random() * 2 + 1;
+      this.color = `rgba(${150+Math.random()*100},${100+Math.random()*100},255,0.7)`;
+      this.speedX = (Math.random() - 0.5) * 0.7;
+      this.speedY = (Math.random() - 0.5) * 0.7;
+    }
+    Particle.prototype.draw = function() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.shadowColor = '#5ee7ff';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+    };
+    Particle.prototype.update = function() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.y < 0 || this.y > h) this.speedY *= -1;
+    };
+    function createParticles(num) {
+      particles = [];
+      for (let i = 0; i < num; i++) {
+        particles.push(new Particle());
+      }
+    }
+    createParticles(80);
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      for (let p of particles) {
+        p.update();
+        p.draw();
+      }
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html> 

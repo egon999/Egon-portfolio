@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | EGON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-DyQz/2+dDZJkMB8+0fjrLRMOxfy7bhfZ6KizoF5k+aXqoVgw35gSWL9yjwEZ1iMt4B6C1YwAqLtrnM11yGZP1k==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <style>
+    body { margin: 0; font-family: 'Montserrat', Arial, sans-serif; background: #0a101f; color: #fff; min-height: 100vh; }
+    header { display: flex; justify-content: space-between; align-items: center; padding: 32px 48px 0 48px; position: relative; z-index: 2; }
+    .brand { font-size: 2.2rem; font-weight: 700; color: #5ee7ff; letter-spacing: 2px; display: flex; align-items: center; }
+    .logo {
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid #5ee7ff;
+      background: #181f3a url('egon-logo.png') center/cover no-repeat;
+      margin-right: 12px;
+      vertical-align: middle;
+    }
+    nav a { color: #b2eaff; text-decoration: none; margin: 0 18px; font-weight: 500; font-size: 1.1rem; transition: color 0.2s; }
+    nav a.active, nav a:hover { color: #5ee7ff; border-bottom: 2px solid #5ee7ff; padding-bottom: 2px; }
+    main { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 0; padding: 0 24px; }
+    .portfolio-section { width: 100%; max-width: 1200px; margin: 0 auto; }
+    .portfolio-title {
+      font-size: 2.6rem;
+      color: #5ee7ff;
+      text-align: center;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+      font-weight: 900;
+      background: linear-gradient(90deg,#5ee7ff,#a685ff,#ff5efc,#5ee7ff);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 3s linear infinite, flicker 2.5s infinite;
+    }
+    .portfolio-subheading {
+      color: #a685ff;
+      text-align: center;
+      font-size: 1.2rem;
+      margin-bottom: 32px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      animation: fadeIn 1.2s;
+    }
+    @keyframes gradientMove {
+      0% {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100% {background-position:0% 50%}
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      10%, 20% { opacity: 0.85; }
+      18%, 22% { opacity: 0.5; }
+      19%, 21% { opacity: 1; }
+      50% { opacity: 0.95; }
+    }
+    .neon-lines {
+      width: 100%;
+      height: 8px;
+      margin: 0 auto 24px auto;
+      background: linear-gradient(90deg, #5ee7ff, #a685ff, #ff5efc, #5ee7ff);
+      background-size: 300% 100%;
+      border-radius: 8px;
+      box-shadow: 0 0 24px #5ee7ff99, 0 0 48px #a685ff44;
+      animation: gradientMove 4s linear infinite;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 32px 28px;
+      padding: 0 16px;
+      position: relative;
+    }
+    .portfolio-item {
+      background: #10182a;
+      border-radius: 20px;
+      box-shadow: 0 0 32px #5ee7ff33, 0 0 0 4px #a685ff22;
+      border: 3px solid #5ee7ff;
+      animation: neonGlow 3s linear infinite, cardIn 1s cubic-bezier(.68,-0.55,.27,1.55);
+      padding: 22px 18px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: box-shadow 0.2s, border-color 0.2s, transform 0.25s cubic-bezier(.68,-0.55,.27,1.55);
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation-fill-mode: forwards;
+    }
+    .portfolio-item.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .portfolio-item:hover {
+      box-shadow: 0 0 64px #5ee7ffcc, 0 0 0 8px #a685ff55;
+      border-color: #a685ff;
+      transform: scale(1.04) rotate(-1deg);
+      z-index: 2;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .portfolio-img {
+      width: 180px;
+      height: 120px;
+      border-radius: 14px;
+      object-fit: cover;
+      margin-bottom: 14px;
+      border: 2.5px solid #5ee7ff;
+      background: #181f3a;
+      box-shadow: 0 0 18px #5ee7ff44;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      animation: neonGlow 3s linear infinite;
+    }
+    .portfolio-img:hover {
+      border-color: #a685ff;
+      box-shadow: 0 0 32px #a685ff99;
+    }
+    .portfolio-title-item { color: #5ee7ff; font-size: 1.1rem; font-weight: 700; margin-bottom: 6px; }
+    .portfolio-desc { color: #b2eaff; font-size: 0.98rem; text-align: center; margin-bottom: 10px; }
+    .order-btn {
+      background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #0a101f;
+      border: none;
+      border-radius: 18px;
+      padding: 10px 28px;
+      font-size: 1.08rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 18px #5ee7ff44;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.18s;
+      animation: pulseBtn 2.2s infinite;
+    }
+    .order-btn:hover {
+      background: linear-gradient(90deg,#a685ff,#5ee7ff);
+      color: #fff;
+      box-shadow: 0 0 24px #a685ff99;
+      transform: scale(1.08);
+    }
+    @keyframes pulseBtn {
+      0%, 100% { box-shadow: 0 2px 18px #5ee7ff44; }
+      50% { box-shadow: 0 0 32px #a685ff99; }
+    }
+    footer { width: 100%; text-align: center; padding: 24px 0 12px 0; color: #5ee7ff; font-size: 1rem; background: transparent; letter-spacing: 1px; z-index: 2; position: relative; }
+    .gallery-modal {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 9999; display: flex; align-items: center; justify-content: center;
+      background: rgba(10,16,31,0.92);
+      animation: fadeIn 0.3s;
+    }
+    .gallery-backdrop {
+      position: absolute; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(10,16,31,0.92);
+      z-index: 0;
+    }
+    .gallery-content {
+      position: relative;
+      background: #10182a;
+      border-radius: 18px;
+      box-shadow: 0 0 32px #5ee7ff55;
+      padding: 32px 24px 24px 24px;
+      max-width: 900px;
+      width: 90vw;
+      max-height: 90vh;
+      overflow-y: auto;
+      z-index: 1;
+      animation: scaleIn 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .gallery-title {
+      color: #5ee7ff;
+      text-align: center;
+      margin-bottom: 18px;
+    }
+    .gallery-close {
+      position: absolute; top: 12px; right: 18px;
+      background: none; border: none; color: #5ee7ff;
+      font-size: 2.2rem; cursor: pointer; z-index: 2;
+      transition: color 0.2s;
+    }
+    .gallery-close:hover { color: #a685ff; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px 28px;
+      justify-items: center;
+      align-items: start;
+      padding: 10px 0 10px 0;
+    }
+    .gallery-img {
+      height: 140px;
+      width: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      object-fit: contain;
+      border: 3px solid #5ee7ff;
+      background: #181f3a;
+      box-shadow: 0 0 32px #5ee7ff55, 0 0 0 4px rgba(94,231,255,0.12);
+      transition: transform 0.25s cubic-bezier(.68,-0.55,.27,1.55), box-shadow 0.25s, border-color 0.5s;
+      cursor: pointer;
+      opacity: 0;
+      transform: scale(0.92);
+      animation: galleryImgIn 0.5s forwards, neonGlow 3s linear infinite;
+      position: relative;
+      display: block;
+      margin: 0 auto;
+    }
+    .gallery-img:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 0 64px #fff, 0 0 32px #5ee7ffcc, 0 0 0 6px #a685ff55;
+      z-index: 2;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes galleryImgIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes neonGlow {
+      0% { border-color: #5ee7ff; box-shadow: 0 0 32px #5ee7ff55, 0 0 0 4px rgba(94,231,255,0.12); }
+      25% { border-color: #a685ff; box-shadow: 0 0 32px #a685ff77, 0 0 0 4px rgba(166,133,255,0.12); }
+      50% { border-color: #ff5efc; box-shadow: 0 0 32px #ff5efc77, 0 0 0 4px rgba(255,94,252,0.12); }
+      75% { border-color: #5effb1; box-shadow: 0 0 32px #5effb177, 0 0 0 4px rgba(94,255,177,0.12); }
+      100% { border-color: #5ee7ff; box-shadow: 0 0 32px #5ee7ff55, 0 0 0 4px rgba(94,231,255,0.12); }
+    }
+    .web-gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 32px;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+    .web-card {
+      background: #10182a;
+      border-radius: 18px;
+      box-shadow: 0 0 32px #5ee7ff33, 0 0 0 4px #a685ff22;
+      border: 3px solid #5ee7ff;
+      animation: neonGlow 3s linear infinite;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 16px 20px 16px;
+      position: relative;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .web-card:hover {
+      box-shadow: 0 0 64px #5ee7ffcc, 0 0 0 8px #a685ff55;
+      border-color: #a685ff;
+      z-index: 2;
+    }
+    .web-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #181f3a;
+      margin-bottom: 14px;
+      box-shadow: 0 0 18px #5ee7ff44;
+      border: 2px solid #a685ff;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .web-card-title {
+      color: #5ee7ff;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+    .web-card-desc {
+      color: #b2eaff;
+      font-size: 0.98rem;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .web-card-btn {
+      background: linear-gradient(90deg,#5ee7ff,#a685ff);
+      color: #181f3a;
+      border: none;
+      border-radius: 12px;
+      padding: 8px 22px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 2px 12px #5ee7ff44;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      margin-top: 6px;
+    }
+    .web-card-btn:hover {
+      background: linear-gradient(90deg,#a685ff,#5ee7ff);
+      color: #fff;
+      box-shadow: 0 0 18px #a685ff99;
+    }
+    .motion-gallery-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px 32px;
+      justify-content: center;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+    .motion-card {
+      background: #10182a;
+      border-radius: 18px;
+      box-shadow: 0 0 32px #5ee7ff33, 0 0 0 4px #a685ff22;
+      border: 3px solid #5ee7ff;
+      animation: neonGlow 3s linear infinite;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 16px 20px 16px;
+      position: relative;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .motion-card:hover {
+      box-shadow: 0 0 64px #5ee7ffcc, 0 0 0 8px #a685ff55;
+      border-color: #a685ff;
+      z-index: 2;
+    }
+    .motion-media {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      border-radius: 12px;
+      background: #181f3a;
+      margin-bottom: 14px;
+      box-shadow: 0 0 18px #5ee7ff44;
+      border: 2px solid #a685ff;
+      transition: box-shadow 0.2s, border-color 0.2s;
+      display: block;
+    }
+    .bg-gradient-overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 60% 20%, #5ee7ff33 0%, transparent 60%),
+                  radial-gradient(ellipse at 30% 80%, #a685ff22 0%, transparent 70%),
+                  linear-gradient(120deg, #0a101f 60%, #181f3a 100%);
+      animation: bgMove 10s linear infinite alternate;
+    }
+    @keyframes bgMove {
+      0% { filter: blur(0px); opacity: 0.7; }
+      100% { filter: blur(2px); opacity: 1; }
+    }
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .bg-gradient-overlay { z-index: 1; }
+    header, main, footer { position: relative; z-index: 2; }
+  </style>
+</head>
+<body>
+  <canvas id="particles-canvas"></canvas>
+  <div class="bg-gradient-overlay"></div>
+  <header>
+    <div class="brand">
+      <span class="logo"></span> EGON
+    </div>
+    <nav>
+      <a href="egon-portfolio.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="#" class="active">Portfolio</a>
+      <a href="skills.html">Skills</a>
+      <a href="content.html">Content</a>
+      <button onclick="openAuthModal()" style="margin-left:18px;background:#5ee7ff;color:#181f3a;padding:8px 18px;border-radius:8px;font-weight:700;border:none;cursor:pointer;">Login / Signup</button>
+    </nav>
+  </header>
+  <main style="padding:0;margin:0;">
+    <section class="portfolio-section" style="margin:0 auto;padding:0;max-width:1200px;width:100%;">
+      <div class="portfolio-title neon-flicker">My Portfolio</div>
+      <div class="portfolio-subheading">Explore my best work in design, web, and motion</div>
+      <div class="neon-lines"></div>
+      <div class="portfolio-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;padding:0 16px;">
+        <div class="portfolio-item">
+          <img class="portfolio-img" src="thumbnail.jpg" alt="Gaming Thumbnails" onclick="openGalleryModal()" style="cursor:pointer;" />
+          <div class="portfolio-title-item">Thumbnail Design</div>
+          <div class="portfolio-desc">High-conversion thumbnails for YouTube and social media.</div>
+          <a href="order.html"><button class="order-btn">Order This</button></a>
+        </div>
+        <div class="portfolio-item">
+          <img class="portfolio-img" src="logo.jpg" alt="Logo Design" onclick="openLogoGalleryModal()" style="cursor:pointer;" />
+          <div class="portfolio-title-item">Logo Design</div>
+          <div class="portfolio-desc">Unique, memorable logos for your business or channel.</div>
+          <a href="order.html"><button class="order-btn">Order This</button></a>
+        </div>
+        <div class="portfolio-item">
+          <img class="portfolio-img" src="web.jpg" alt="Web Design" onclick="openWebGalleryModal()" style="cursor:pointer;" />
+          <div class="portfolio-title-item">Website Development</div>
+          <div class="portfolio-desc">Modern, responsive websites for brands and creators.</div>
+          <a href="order.html"><button class="order-btn">Order This</button></a>
+        </div>
+        <div class="portfolio-item">
+          <img class="portfolio-img" src="vfx-gfx-cover.png" alt="GFX/VFX" onclick="openMotionGalleryModal()" style="cursor:pointer;" />
+          <div class="portfolio-title-item">GFX/VFX</div>
+          <div class="portfolio-desc">Eye-catching graphics and video effects for content creators.</div>
+          <a href="order.html"><button class="order-btn">Order This</button></a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    &copy; 2024 EGON. All rights reserved.
+  </footer>
+  <!-- Auth Modal -->
+  <div id="auth-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(10,16,31,0.95); z-index:9999; align-items:center; justify-content:center;">
+    <div style="background:#181f3a; border-radius:16px; padding:32px 24px; max-width:350px; width:90%; box-shadow:0 0 32px #5ee7ff55; text-align:center;">
+      <h2 style="color:#5ee7ff;">Login / Signup</h2>
+      <input id="auth-email" type="email" placeholder="Email" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <input id="auth-password" type="password" placeholder="Password" style="width:100%;margin:12px 0;padding:10px;border-radius:8px;border:1px solid #5ee7ff;background:#10182a;color:#fff;">
+      <button onclick="login()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#5ee7ff;color:#181f3a;font-weight:700;">Login</button>
+      <button onclick="signup()" style="width:100%;margin:8px 0;padding:10px;border-radius:8px;background:#a685ff;color:#fff;font-weight:700;">Sign Up</button>
+      <button onclick="closeAuthModal()" style="margin-top:10px;background:none;border:none;color:#5ee7ff;">Close</button>
+      <div id="auth-message" style="color:#ff5e5e;margin-top:10px;"></div>
+    </div>
+  </div>
+  <!-- Gallery Modal -->
+  <div id="gallery-modal" class="gallery-modal" style="display:none;">
+    <div class="gallery-backdrop" onclick="closeGalleryModal()"></div>
+    <div class="gallery-content">
+      <button class="gallery-close" onclick="closeGalleryModal()">&times;</button>
+      <h2 class="gallery-title">Thumbnail Portfolio</h2>
+      <div class="gallery-grid" id="gallery-grid"></div>
+      <div style="text-align:center;margin-top:18px;">
+        <div style="color:#5ee7ff;font-size:1.1rem;font-weight:600;letter-spacing:1px;">&copy; EGON DZNS</div>
+        <div style="color:#a685ff;font-size:1rem;margin-top:4px;">More coming soon...</div>
+      </div>
+    </div>
+  </div>
+  <!-- Lightbox Modal for Enlarged Image -->
+  <div id="lightbox-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:10000;background:rgba(10,16,31,0.97);align-items:center;justify-content:center;">
+    <div style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(10,16,31,0.97);z-index:0;" onclick="closeLightbox()"></div>
+    <img id="lightbox-img" src="" alt="Full Image" style="max-width:90vw;max-height:85vh;border-radius:18px;box-shadow:0 0 64px #5ee7ffcc,0 0 0 8px #a685ff55;position:relative;z-index:2;animation:scaleIn 0.4s cubic-bezier(.68,-0.55,.27,1.55);">
+    <button onclick="closeLightbox()" style="position:fixed;top:32px;right:48px;z-index:3;font-size:2.5rem;background:none;border:none;color:#5ee7ff;cursor:pointer;transition:color 0.2s;">&times;</button>
+  </div>
+  <!-- 3D Logo Gallery Modal -->
+  <div id="logo-gallery-modal" class="gallery-modal" style="display:none;">
+    <div class="gallery-backdrop" onclick="closeLogoGalleryModal()"></div>
+    <div class="gallery-content">
+      <button class="gallery-close" onclick="closeLogoGalleryModal()">&times;</button>
+      <h2 class="gallery-title">3D Logo Portfolio</h2>
+      <div class="gallery-grid" id="logo-gallery-grid"></div>
+      <div style="text-align:center;margin-top:18px;">
+        <div style="color:#5ee7ff;font-size:1.1rem;font-weight:600;letter-spacing:1px;">&copy; EGON DZNS</div>
+        <div style="color:#a685ff;font-size:1rem;margin-top:4px;">More coming soon...</div>
+      </div>
+    </div>
+  </div>
+  <!-- Web Gallery Modal -->
+  <div id="web-gallery-modal" class="gallery-modal" style="display:none;">
+    <div class="gallery-backdrop" onclick="closeWebGalleryModal()"></div>
+    <div class="gallery-content" style="max-width:1100px;">
+      <button class="gallery-close" onclick="closeWebGalleryModal()">&times;</button>
+      <h2 class="gallery-title">Web Projects</h2>
+      <div class="web-gallery-grid" id="web-gallery-grid"></div>
+      <div style="text-align:center;margin-top:18px;">
+        <div style="color:#5ee7ff;font-size:1.1rem;font-weight:600;letter-spacing:1px;">&copy; EGON DZNS</div>
+        <div style="color:#a685ff;font-size:1rem;margin-top:4px;">More coming soon...</div>
+      </div>
+    </div>
+  </div>
+  <!-- Motion Design Gallery Modal -->
+  <div id="motion-gallery-modal" class="gallery-modal" style="display:none;">
+    <div class="gallery-backdrop" onclick="closeMotionGalleryModal()"></div>
+    <div class="gallery-content" style="max-width:1100px;">
+      <button class="gallery-close" onclick="closeMotionGalleryModal()">&times;</button>
+      <h2 class="gallery-title">Motion Design & Intros</h2>
+      <div class="motion-gallery-grid" id="motion-gallery-grid"></div>
+      <div style="text-align:center;margin-top:18px;">
+        <div style="color:#5ee7ff;font-size:1.1rem;font-weight:600;letter-spacing:1px;">&copy; EGON DZNS</div>
+        <div style="color:#a685ff;font-size:1rem;margin-top:4px;">More coming soon...</div>
+      </div>
+    </div>
+  </div>
+  <!-- Particles JS -->
+  <script>
+    (function() {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let w = window.innerWidth, h = window.innerHeight;
+      function resize() {
+        w = window.innerWidth;
+        h = window.innerHeight;
+        canvas.width = w;
+        canvas.height = h;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const PARTICLE_COUNT = 70;
+      const particles = [];
+      function randomColor() {
+        const colors = ['#5ee7ff', '#a685ff', '#ff5efc', '#5effb1'];
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+      function Particle() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.radius = Math.random() * 2.5 + 1.5;
+        this.color = randomColor();
+        this.speedX = (Math.random() - 0.5) * 0.7;
+        this.speedY = (Math.random() - 0.5) * 0.7;
+        this.alpha = Math.random() * 0.5 + 0.5;
+      }
+      Particle.prototype.draw = function() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 18;
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.restore();
+      };
+      Particle.prototype.update = function() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > w) this.speedX *= -1;
+        if (this.y < 0 || this.y > h) this.speedY *= -1;
+      };
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push(new Particle());
+      }
+      function animate() {
+        ctx.clearRect(0, 0, w, h);
+        for (let p of particles) {
+          p.update();
+          p.draw();
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+  </script>
+  <!-- Firebase Auth JS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyBtdBUjaBHNN4qFPMrD91M4HYONj_h6OOo",
+      authDomain: "egon-web.firebaseapp.com",
+      projectId: "egon-web",
+      storageBucket: "egon-web.firebasestorage.app",
+      messagingSenderId: "1040413593428",
+      appId: "1:1040413593428:web:55ecd13d0998800f5b42c1",
+      measurementId: "G-PW0LSV4C79"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    window.openAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'flex';
+      document.getElementById('auth-message').innerText = '';
+    }
+    window.closeAuthModal = function() {
+      document.getElementById('auth-modal').style.display = 'none';
+    }
+    window.login = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    window.signup = function() {
+      const email = document.getElementById('auth-email').value;
+      const password = document.getElementById('auth-password').value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => { window.closeAuthModal(); })
+        .catch(e => { document.getElementById('auth-message').innerText = e.message; });
+    }
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = user.email);
+      } else {
+        document.querySelectorAll('.user-email').forEach(el => el.innerText = '');
+      }
+    });
+  </script>
+  <script>
+    function openGalleryModal() {
+      document.getElementById('gallery-modal').style.display = 'flex';
+      const grid = document.getElementById('gallery-grid');
+      grid.innerHTML = '';
+      let found = false;
+      // Try to load up to 20 images named 1.jpg, 2.jpg, etc.
+      for (let i = 1; i <= 20; i++) {
+        const img = document.createElement('img');
+        img.src = i + '.jpg';
+        img.alt = 'Thumbnail Portfolio ' + i;
+        img.className = 'gallery-img';
+        img.onerror = function() { this.remove(); checkIfNone(); };
+        img.onload = function() { found = true; };
+        img.onclick = function(e) { openLightbox(this.src); };
+        grid.appendChild(img);
+        console.log('Trying to load:', img.src);
+      }
+      function checkIfNone() {
+        if (!grid.querySelector('.gallery-img')) {
+          grid.innerHTML = '<div style="color:#5ee7ff;text-align:center;width:100%;font-size:1.2rem;">No images found in the current folder.</div>';
+        }
+      }
+      setTimeout(checkIfNone, 1000); // fallback in case all images fail
+    }
+    function closeGalleryModal() {
+      document.getElementById('gallery-modal').style.display = 'none';
+    }
+    // Optional: close modal on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeGalleryModal();
+    });
+    // Lightbox functions
+    function openLightbox(src) {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-img');
+      img.src = src;
+      modal.style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox-modal').style.display = 'none';
+      document.getElementById('lightbox-img').src = '';
+    }
+    // Close lightbox on ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+    function openLogoGalleryModal() {
+      document.getElementById('logo-gallery-modal').style.display = 'flex';
+      const grid = document.getElementById('logo-gallery-grid');
+      grid.innerHTML = '';
+      let found = false;
+      // Try to load up to 20 images named 1.png, 2.png, etc.
+      for (let i = 1; i <= 20; i++) {
+        const img = document.createElement('img');
+        img.src = i + '.png';
+        img.alt = '3D Logo Portfolio ' + i;
+        img.className = 'gallery-img';
+        img.onerror = function() { this.remove(); checkIfNone(); };
+        img.onload = function() { found = true; };
+        img.onclick = function(e) { openLightbox(this.src); };
+        grid.appendChild(img);
+      }
+      function checkIfNone() {
+        if (!grid.querySelector('.gallery-img')) {
+          grid.innerHTML = '<div style="color:#5ee7ff;text-align:center;width:100%;font-size:1.2rem;">No images found in the current folder.</div>';
+        }
+      }
+      setTimeout(checkIfNone, 1000);
+    }
+    function closeLogoGalleryModal() {
+      document.getElementById('logo-gallery-modal').style.display = 'none';
+    }
+    function openWebGalleryModal() {
+      document.getElementById('web-gallery-modal').style.display = 'flex';
+      const grid = document.getElementById('web-gallery-grid');
+      grid.innerHTML = '';
+      // Add your web projects here. For now, just one example:
+      const projects = [
+        {
+          img: 'web1.png',
+          title: 'Flourite Cheats',
+          desc: 'Premium gaming enhancement website with product showcase, secure panels, and vibrant community.',
+          url: 'https://flourite-cheats.github.io/FlouriteCheats/'
+        }
+        // Add more projects as needed: {img: 'web2.png', title: '...', desc: '...', url: '...'}
+      ];
+      for (const proj of projects) {
+        const card = document.createElement('div');
+        card.className = 'web-card';
+        card.innerHTML = `
+          <img src="${proj.img}" alt="${proj.title}" class="web-card-img" />
+          <div class="web-card-title">${proj.title}</div>
+          <div class="web-card-desc">${proj.desc}</div>
+          <a href="${proj.url}" target="_blank"><button class="web-card-btn">Visit Site</button></a>
+        `;
+        grid.appendChild(card);
+      }
+    }
+    function closeWebGalleryModal() {
+      document.getElementById('web-gallery-modal').style.display = 'none';
+    }
+    function openMotionGalleryModal() {
+      document.getElementById('motion-gallery-modal').style.display = 'flex';
+      const grid = document.getElementById('motion-gallery-grid');
+      grid.innerHTML = '';
+      // Try to load up to 20 files: motion1.mp4, motion2.mp4, motion3.gif, etc.
+      for (let i = 1; i <= 20; i++) {
+        // Try mp4 first
+        let found = false;
+        const video = document.createElement('video');
+        video.src = `motion${i}.mp4`;
+        video.className = 'motion-media';
+        video.controls = true;
+        video.loop = true;
+        video.muted = true;
+        video.style.background = '#181f3a';
+        video.onerror = function() {
+          // If mp4 not found, try gif
+          const img = document.createElement('img');
+          img.src = `motion${i}.gif`;
+          img.className = 'motion-media';
+          img.onerror = function() {
+            // If gif not found, try png
+            const img2 = document.createElement('img');
+            img2.src = `motion${i}.png`;
+            img2.className = 'motion-media';
+            img2.onerror = function() { this.remove(); };
+            const card2 = document.createElement('div');
+            card2.className = 'motion-card';
+            card2.appendChild(img2);
+            grid.appendChild(card2);
+          };
+          const card = document.createElement('div');
+          card.className = 'motion-card';
+          card.appendChild(img);
+          grid.appendChild(card);
+        };
+        video.onloadeddata = function() { found = true; };
+        const card = document.createElement('div');
+        card.className = 'motion-card';
+        card.appendChild(video);
+        grid.appendChild(card);
+      }
+    }
+    function closeMotionGalleryModal() {
+      document.getElementById('motion-gallery-modal').style.display = 'none';
+    }
+    // Animate portfolio cards on scroll
+    function animatePortfolioCards() {
+      const cards = document.querySelectorAll('.portfolio-item');
+      const trigger = window.innerHeight * 0.92;
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        if (rect.top < trigger) {
+          card.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', animatePortfolioCards);
+    window.addEventListener('DOMContentLoaded', animatePortfolioCards);
+  </script>
+</body>
+</html> 
